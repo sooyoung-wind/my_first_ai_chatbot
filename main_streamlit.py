@@ -7,13 +7,15 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.chat_models import ChatOpenAI
 from langchain.vectorstores import Chroma
-from dotenv import load_dotenv
 from langchain.chains import RetrievalQA
 import streamlit as st
 import tempfile
 import os
 
-load_dotenv()
+### 오픈소스 임베딩 모델
+from langchain.embeddings import HuggingFaceEmbeddings
+embeddings_model = HuggingFaceEmbeddings(
+    model_name="intfloat/multilingual-e5-large")
 
 ### title
 st.title("ChatPDF")
@@ -48,7 +50,7 @@ if uploaded_file is not None:
     texts = text_splitter.split_documents(pages)
 
     ### Embedding
-    embeddings_model = OpenAIEmbeddings()
+    # embeddings_model = OpenAIEmbeddings()
 
     ### load it into Chroma
     db = Chroma.from_documents(texts, embeddings_model)

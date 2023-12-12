@@ -12,11 +12,6 @@ import streamlit as st
 import tempfile
 import os
 
-### 오픈소스 임베딩 모델
-from langchain.embeddings import HuggingFaceEmbeddings
-embeddings_model = HuggingFaceEmbeddings(
-    model_name="intfloat/multilingual-e5-large")
-
 ### title
 st.title("ChatPDF")
 st.write("---")
@@ -50,7 +45,7 @@ if uploaded_file is not None:
     texts = text_splitter.split_documents(pages)
 
     ### Embedding
-    # embeddings_model = OpenAIEmbeddings()
+    embeddings_model = OpenAIEmbeddings()
 
     ### load it into Chroma
     db = Chroma.from_documents(texts, embeddings_model)

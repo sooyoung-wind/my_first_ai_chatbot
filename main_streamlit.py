@@ -36,11 +36,6 @@ def pdf_to_document(uploaded_file):
 if uploaded_file is not None:
     pages = pdf_to_document(uploaded_file)
 
-
-    ### Loader
-    loader = PyPDFLoader('sample.pdf')
-    pages = loader.load_and_split()
-
     ### Split
     text_splitter = RecursiveCharacterTextSplitter(
         ### Set a really small chunk size, just to show.
